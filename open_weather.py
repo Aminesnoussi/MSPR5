@@ -46,3 +46,23 @@ class OpenWeather:
         df['lat'] = lat
         df['lon'] = lon
         return df
+
+    def get_time_frame_weather_df(self, lat, lon, start_date, end_date):
+        """
+        Fetches weather data for a given latitude and longitude over a specified time frame.
+        The multithreaded function loops over the date range and collects daily weather data.
+        :param lat:
+        :param lon:
+        :param start_date:
+        :param end_date:
+        :return:
+        """
+
+        date_range = pd.date_range(start=start_date, end=end_date)
+        weather_data = []
+
+        for date in date_range:
+            daily_data = self.get_daily_weather_df(lat, lon, date.strftime('%Y-%m-%d'))
+            weather_data.append(daily_data)
+
+        return pd.concat(weather_data, ignore_index=True)
