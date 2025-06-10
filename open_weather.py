@@ -20,7 +20,7 @@ class OpenWeather:
         Returns:
             dict: The daily weather data for the specified location.
         """
-        url = f"{self.api_url}/day_summary?lat={lat}&lon={lon}&date={date}&appid={self.api_token}"
+        url = f"{self.api_url}/day_summary?lat={lat}&lon={lon}&date={date}&appid={self.api_token}&units=metric"
         response = requests.get(url)
 
         if response.status_code == 200:
